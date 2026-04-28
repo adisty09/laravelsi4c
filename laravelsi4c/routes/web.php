@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FakultasController;
 use App\Http\Controllers\PeriodController;
+use App\Http\Controllers\BeritaController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -11,3 +12,5 @@ Route::get('/', function () {
 Route::resource('fakultas', FakultasController::class);
 
 Route::resource('/periode', PeriodController::class);
+
+Route::resource('/berita', BeritaController::class);

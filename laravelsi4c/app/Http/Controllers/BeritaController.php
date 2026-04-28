@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Period;
+use App\Models\Berita;
 use Illuminate\Http\Request;
 
-class PeriodController extends Controller
+class BeritaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // akses model Periode
-        $result = Period::all(); // select*from periode
+        // akses model Berita
+        $result = Berita::all(); // select*from berita
         //dd($result);
-        // kirim data periode ke view
-        return view ('periode.index', compact('result)'));
+        // kirim data berita ke view
+        return view ('berita.index', compact('result'));
     }
 
     /**
@@ -38,7 +38,7 @@ class PeriodController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Period $period)
+    public function show(Berita $berita)
     {
         //
     }
@@ -46,7 +46,7 @@ class PeriodController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Period $period)
+    public function edit(Berita $berita)
     {
         //
     }
@@ -54,7 +54,7 @@ class PeriodController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Period $period)
+    public function update(Request $request, Berita $berita)
     {
         //
     }
@@ -62,7 +62,7 @@ class PeriodController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Period $period)
+    public function destroy(Berita $berita)
     {
         //
     }
