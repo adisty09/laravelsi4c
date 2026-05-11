@@ -8,10 +8,13 @@
 </head>
 <body>
     <form action="/fakultas" method="post">
+        @csrf
          <div class="mb-3">
             <h5>Form Pengisian Data Fakultas</h5>
             <label for="nama" class="form-label">Nama Fakultas</label>
-            <input type="email" class="form-control" id="nama" placeholder="Masukkan nama fakultas">
+            <input type="text" class="form-control" id="nama" placeholder="Masukkan nama fakultas..">
+
+            <label for="singkatan" class="form-label">Singkatan Fakultas</label>
 </div>
 
 
