@@ -2,10 +2,7 @@
 
 @section('title', 'Program Studi')
 
-@@section('content')
-    
-@endsection
-
+@section('content') 
 <h1>Data Prodi</h1>
 <table class="table table-bordered table-hover">
     <tr>
@@ -27,5 +24,4 @@
     @endforeach
 
 </table>
-@endsection
 @endsection

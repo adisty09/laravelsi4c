@@ -13,18 +13,18 @@ class PeriodController extends Controller
     public function index()
     {
         // akses model Periode
-        $result = Period::all(); // select*from periode
+        $period = Period::all(); // select*from periode
         //dd($result);
         // kirim data periode ke view
-        return view ('periode.index', compact('result)'));
+        return view ('periode.index', compact('period'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        //
+    {   
+        return view('periode.create');
     }
 
     /**
@@ -32,7 +32,12 @@ class PeriodController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validasi sata
+        $input = $request->validate([
+            'tahun_akademik' => 'required',
+            'semester' => 'required',
+            
+        ]);
     }
 
     /**

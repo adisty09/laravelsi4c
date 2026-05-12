@@ -348,12 +348,18 @@
                   <i class="nav-icon bi bi-bank"></i>
                   <p>Fakultas</p>
                 </a>
+              </li>
                 <li class="nav-item">
                 <a href="{{url('prodi')}}" class="nav-link">
-                  <i class="nav-icon bi bi-map"></i>
+                  <i class="nav-icon bi bi-bank"></i>
                   <p>Program Studi</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{url('periode')}}" class="nav-link">
+                  <i class="nav-icon bi bi-calendar"></i>
+                  <p>Periode</p>
+                </a>
               </li>
               <li class="nav-item">
                 <a href="#" class="nav-link">
@@ -763,7 +769,7 @@
       <!--end::Sidebar-->
       <!--begin::App Main-->
       <main class="app-main">
-        <!--begin::App Content Header-->
+        <!--begin::App Content Header-->fakultas
         <div class="app-content-header">
           <!--begin::Container-->
           <div class="container-fluid">
