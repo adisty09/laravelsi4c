@@ -351,7 +351,7 @@
               </li>
                 <li class="nav-item">
                 <a href="{{url('prodi')}}" class="nav-link">
-                  <i class="nav-icon bi bi-bank"></i>
+                  <i class="nav-icon bi bi-map"></i>
                   <p>Program Studi</p>
                 </a>
               </li>
@@ -769,7 +769,7 @@
       <!--end::Sidebar-->
       <!--begin::App Main-->
       <main class="app-main">
-        <!--begin::App Content Header-->fakultas
+        <!--begin::App Content Header-->
         <div class="app-content-header">
           <!--begin::Container-->
           <div class="container-fluid">
