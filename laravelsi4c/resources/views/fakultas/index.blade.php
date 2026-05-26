@@ -1,6 +1,6 @@
 @extends('main')
 
-@section('title', 'Edit Fakultas')
+@section('title', 'Fakultas')
 
 @section('content')
 <a href="{{route('fakultas.create')}}" class="btn btn-secondary mb-3">Tambah Fakultas</a>

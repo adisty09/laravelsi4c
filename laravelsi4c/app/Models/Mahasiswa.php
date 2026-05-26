@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mahasiswa extends Model
 {
-    protected $fillable = ['id', 'npm','nama','prodi_id','foto'];
+    protected $fillable = ['npm','nama','prodi_id','foto'];
     // relasi mahasiswa ke prodi
     public function prodi()
     

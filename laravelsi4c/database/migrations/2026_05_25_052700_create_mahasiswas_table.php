@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('npm', 11)->unique();
             $table->string('nama', 50);
             $table->foreignId('prodi_id')->constrained()->onDelete('restrict');
-            $table->string('foto',100)->nullable();
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }
