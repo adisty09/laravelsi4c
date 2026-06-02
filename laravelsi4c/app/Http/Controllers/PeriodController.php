@@ -32,12 +32,17 @@ class PeriodController extends Controller
      */
     public function store(Request $request)
     {
-        //validasi sata
-        $input = $request->validate([
+        // validasi data
+        $data = $request->validate([
             'tahun_akademik' => 'required',
-            'semester' => 'required',
-            
+            'kode_smt' => 'required',
         ]);
+
+        Period::create($data);
+
+        return redirect()->route('periode.index')->with('success', 'Data periode berhasil ditambahkan!');
+
+
     }
 
     /**

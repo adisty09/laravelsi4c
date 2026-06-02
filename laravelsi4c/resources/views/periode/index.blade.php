@@ -16,8 +16,8 @@
     @foreach($period as $key => $period)
     <tr>
         <td>{{ $key + 1 }}</td>
-        <td>{{ $fakultas->tahun_akademik }}</td>
-        <td>{{ $fakultas->semester }}</td>
+        <td>{{ $period->tahun_akademik }}</td>
+        <td>{{ $period->kode_smt }}</td>
 
     </tr>
     @endforeach

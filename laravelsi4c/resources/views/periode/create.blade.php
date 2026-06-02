@@ -3,10 +3,8 @@
 @section('title', 'Tambah Periode')
 
 @section('content')
-
-
-    <form action="{{ route('periode.store')}}" method="post">
-        <a href="{{('periode.index')}}" class="btn btn-primary mb-3">Kembali</a>
+    <a href="{{ route('periode.index') }}" class="btn btn-primary mb-3">Kembali</a>
+    <form action="{{ route('periode.store') }}" method="post">
         @csrf
         <div class="m-3">
             <h5>Form Pengisian Data Periode</h5>
@@ -17,13 +15,13 @@
                 
             @enderror
 
-            <label for="semester" class="form-label">Kode Semester</label>
-            <select class="form-select" name="semester" id="semester" required>
+            <label for="kode_smt" class="form-label">Kode kode_smt</label>
+            <select class="form-select" name="kode_smt" id="kode_smt" required>
                <option value="" disabled selected>Pilih Kode Semester</option>
-               <option value="1" {{ old('semester') == '1' ? 'selected' : ''}}>Ganjil</option>
-               <option value="1" {{ old('semester') == '1' ? 'selected' : ''}}>Genap</option>
+               <option value="1" {{ old('kode_smt') == '1' ? 'selected' : ''}}>Ganjil</option>
+               <option value="2" {{ old('kode_smt') == '2' ? 'selected' : ''}}>Genap</option>
              </select>
-            @error('semester')
+            @error('kode_smt')
             <div class="text-danger">{{ $message }}</div>
                 
             @enderror
