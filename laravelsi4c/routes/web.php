@@ -6,6 +6,7 @@ use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\MahasiswaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdiController;
+use App\Http\Controllers\DashboardController;
 use App\Models\Mahasiswa;
 
 Route::get('/', function () {
@@ -21,4 +22,7 @@ Route::resource('/berita', BeritaController::class);
 Route::resource('/prodi', ProdiController::class);
 
 Route::resource('/mahasiswa', MahasiswaController::class);
+
+
+Route::get('/dashboard', [DashboardController::class, 'index']);
 

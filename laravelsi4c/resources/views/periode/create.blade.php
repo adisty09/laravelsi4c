@@ -4,17 +4,9 @@
 
 @section('content')
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Periode</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-</head>
 
-<body>
     <form action="{{ route('periode.store')}}" method="post">
+        <a href="{{('periode.index')}}" class="btn btn-primary mb-3">Kembali</a>
         @csrf
         <div class="m-3">
             <h5>Form Pengisian Data Periode</h5>
@@ -25,8 +17,12 @@
                 
             @enderror
 
-            <label for="semester" class="form-label">Singkatan Fakultas</label>
-            <input name ="semester" type="text" class="form-control" id="semester" placeholder="Masukkan Semester.." value={{old ('semester')}}>
+            <label for="semester" class="form-label">Kode Semester</label>
+            <select class="form-select" name="semester" id="semester" required>
+               <option value="" disabled selected>Pilih Kode Semester</option>
+               <option value="1" {{ old('semester') == '1' ? 'selected' : ''}}>Ganjil</option>
+               <option value="1" {{ old('semester') == '1' ? 'selected' : ''}}>Genap</option>
+             </select>
             @error('semester')
             <div class="text-danger">{{ $message }}</div>
                 
