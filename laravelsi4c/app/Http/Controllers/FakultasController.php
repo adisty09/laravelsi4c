@@ -78,11 +78,11 @@ class FakultasController extends Controller
         //dd($fakultas);
         //validasi data
         $input = $request->validate([
-            'nama' => 'requaired|unique:fakultas,nama,'
+            'nama' => 'required|unique:fakultas,nama,'
             .$fakultas->id, //validasi nama harus unik sitabel fakultas kecuali
             //data yang sedang diupdate
-            'singkatan' => 'requaired',
-            'dekan' => 'requaired'
+            'singkatan' => 'required',
+            'dekan' => 'required'
         ]);
 
         //update data ke tabel fakultas
@@ -102,6 +102,6 @@ class FakultasController extends Controller
         $fakultas->delete(); //delete form
         
         return redirect()->route('fakultas.index')
-        ->with('success','Data fakultas berhasil dihapus'); //redirect ke halaman index fakultas
+        ->with('success','Data Fakultas Berhasil Terhapus!'); //redirect ke halaman index fakultas
     }
 }

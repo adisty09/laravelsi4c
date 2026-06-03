@@ -4,7 +4,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>AdminLTE 4 | Unfixed Sidebar</title>
+    <title>SIMPONI | Universitas MDP</title>
 
     <!--begin::Accessibility Meta Tags-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
@@ -14,7 +14,7 @@
     <!--end::Accessibility Meta Tags-->
 
     <!--begin::Primary Meta Tags-->
-    <meta name="title" content="AdminLTE 4 | Unfixed Sidebar" />
+    <meta name="title" content="SIMPONI | Universitas MDP" />
     <meta name="author" content="ColorlibHQ" />
     <meta name="description"
         content="AdminLTE is a Free Bootstrap 5 Admin Dashboard, 30 example pages using Vanilla JS. Fully accessible with WCAG 2.1 AA compliance." />
@@ -25,7 +25,7 @@
     <!--begin::Accessibility Features-->
     <!-- Skip links will be dynamically added by accessibility.js -->
     <meta name="supported-color-schemes" content="light dark" />
-    <link rel="preload" href="../css/adminlte.css" as="style" />
+    <link rel="stylesheet" href="{{ asset('css/adminlte.css') }}" as="style" />
     <!--end::Accessibility Features-->
 
     <!--begin::Fonts-->
@@ -45,7 +45,7 @@
     <!--end::Third Party Plugin(Bootstrap Icons)-->
 
     <!--begin::Required Plugin(AdminLTE)-->
-    <link rel="stylesheet" href="../css/adminlte.css" />
+    <link rel="stylesheet" href="{{ asset('css/adminlte.css') }}" />
     <!--end::Required Plugin(AdminLTE)-->
 </head>
 <!--end::Head-->
@@ -140,7 +140,7 @@
                                 <!--begin::Message-->
                                 <div class="d-flex">
                                     <div class="flex-shrink-0">
-                                        <img src="../assets/img/user3-128x128.jpg" alt="User Avatar"
+                                        <img src="{{ asset('assets/img/user3-128x128.jpg') }}" alt="User Avatar"
                                             class="img-size-50 rounded-circle me-3" />
                                     </div>
                                     <div class="flex-grow-1">
@@ -205,17 +205,17 @@
                     <!--begin::User Menu Dropdown-->
                     <li class="nav-item dropdown user-menu">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img src="../assets/img/user2-160x160.jpg" class="user-image rounded-circle shadow"
+                            <img src="{{ asset('assets/img/fotofira.jpeg') }}" class="user-image rounded-circle shadow"
                                 alt="User Image" />
-                            <span class="d-none d-md-inline">Alexander Pierce</span>
+                            <span class="d-none d-md-inline">Fira Ramaita</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                             <!--begin::User Image-->
                             <li class="user-header text-bg-primary">
-                                <img src="../assets/img/user2-160x160.jpg" class="rounded-circle shadow"
+                                <img src="{{ asset('assets/img/fotofira.jpeg') }}" class="rounded-circle shadow"
                                     alt="User Image" />
                                 <p>
-                                    Alexander Pierce - Web Developer
+                                    Fira Ramaita - Web Developer
                                     <small>Member since Nov. 2023</small>
                                 </p>
                             </li>
@@ -257,13 +257,13 @@
             <!--begin::Sidebar Brand-->
             <div class="sidebar-brand">
                 <!--begin::Brand Link-->
-                <a href="../index.html" class="brand-link">
+                <a href="{{ url('dashboard') }}" class="brand-link">
                     <!--begin::Brand Image-->
-                    <img src="../assets/img/AdminLTELogo.png" alt="AdminLTE Logo"
+                    <img src="{{ asset('assets/img/logo.jpg') }}" alt="Logo SIMPONI"
                         class="brand-image opacity-75 shadow" />
                     <!--end::Brand Image-->
                     <!--begin::Brand Text-->
-                    <span class="brand-text fw-light">AdminLTE 4</span>
+                    <span class="brand-text fw-light">SIMPONI</span>
                     <!--end::Brand Text-->
                 </a>
                 <!--end::Brand Link-->
@@ -278,19 +278,19 @@
                        
                         <li class="nav-item">
                             <a href="{{ url('dashboard') }}" class="nav-link">
-                                <i class="nav-icon bi bi-speedometer"></i>
+                                <i class="nav-icon bi bi-ui-checks-grid"></i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ url('fakultas') }}" class="nav-link">
-                                <i class="nav-icon bi bi-bank"></i>
+                                <i class="nav-icon bi bi-book-fill"></i>
                                 <p>Fakultas</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ url('prodi') }}" class="nav-link">
-                                <i class="nav-icon bi bi-map"></i>
+                                <i class="nav-icon bi bi-briefcase-fill"></i>
                                 <p>Program Studi</p>
                             </a>
                         </li>
@@ -302,8 +302,14 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ url('mahasiswa') }}" class="nav-link">
-                                <i class="nav-icon bi bi-people"></i>
+                                <i class="nav-icon bi bi-people-fill"></i>
                                 <p>Mahasiswa</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('berita') }}" class="nav-link">
+                                <i class="nav-icon bi bi-box2-fill"></i>
+                                <p>Berita</p>
                             </a>
                         </li>
                         
@@ -329,7 +335,7 @@
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-end">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Unfixed Layout</li>
+                                <li class="breadcrumb-item active" aria-current="page">Universitas MDP</li>
                             </ol>
                         </div>
                     </div>
@@ -364,7 +370,7 @@
                                 </div>
                                 <div class="card-body">@yield('content')</div>
                                 <!-- /.card-body -->
-                                <div class="card-footer">Footer</div>
+                                {{-- <div class="card-footer">Footer</div> --}}
                                 <!-- /.card-footer-->
                             </div>
                             <!-- /.card -->
@@ -377,18 +383,18 @@
         </main>
         <!--end::App Main-->
         <!--begin::Footer-->
-        <footer class="app-footer">
+        {{-- <footer class="app-footer"> --}}
             <!--begin::To the end-->
-            <div class="float-end d-none d-sm-inline">Anything you want</div>
+            {{-- <div class="float-end d-none d-sm-inline">Anything you want</div> --}}
             <!--end::To the end-->
             <!--begin::Copyright-->
-            <strong>
+            {{-- <strong>
                 Copyright &copy; 2014-2026&nbsp;
                 <a href="https://adminlte.io" class="text-decoration-none">AdminLTE.io</a>.
             </strong>
             All rights reserved.
             <!--end::Copyright-->
-        </footer>
+        </footer> --}}
         <!--end::Footer-->
     </div>
     <!--end::App Wrapper-->

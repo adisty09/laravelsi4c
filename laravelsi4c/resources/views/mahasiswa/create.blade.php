@@ -4,19 +4,18 @@
 
 @section('content')
 
-
+    <a href="{{ route('mahasiswa.index') }}" class="btn btn-secondary mb-3">Kembali</a>
     <form action="{{route('mahasiswa.store')}}"method="post" enctype="multipart/form-data">
         <div class="m-3">
             <label for="nama" class="form-label">Nama Mahasiswa</label>
-            <input type="text" class="form-control" name="nama" id="nama" placeholder="Masukkan Nama Mahasiswa"
+            <input type="text" class="form-control" name="nama" id="nama"
                 value={{ old('nama') }}>
             @error('nama')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
 
             <label for="npm" class="form-label">NPM</label>
-            <input name="npm" type="text" class="form-control" id="npm"
-                placeholder="Masukkan NPM Mahasiswa..." value={{ old('npm') }}>
+            <input name="npm" type="text" class="form-control" id="npm" value={{ old('npm') }}>
             @error('npm')
                 <div class="text-danger">{{ $message }}</div>
             @enderror
@@ -41,7 +40,7 @@
 
             </div>
 
-            <button type="submit" class="btn btn-primary mt-3">Simpan</button>
+            <button type="submit" class="btn btn-secondary mt-3">Simpan</button>
         </div>
     </form>
 

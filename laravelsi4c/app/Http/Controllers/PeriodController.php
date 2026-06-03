@@ -40,7 +40,7 @@ class PeriodController extends Controller
 
         Period::create($data);
 
-        return redirect()->route('periode.index')->with('success', 'Data periode berhasil ditambahkan!');
+        return redirect()->route('periode.index')->with('success', 'Data Periode Berhasil Ditambahkan!');
 
 
     }
@@ -66,7 +66,13 @@ class PeriodController extends Controller
      */
     public function update(Request $request, Period $period)
     {
-        //
+        //dd(%period);
+        $input = $request->validate([
+            'tahun_akademik' => "required|unique:periods,tahun_akademik,".$period->id,
+            'kode_smt' => 'required',
+        ]);
+        $period->update($input);
+        return redirect()->route('periode.index')->with('success', 'Data Periode Berhasil Diupdate!');
     }
 
     /**
@@ -74,6 +80,9 @@ class PeriodController extends Controller
      */
     public function destroy(Period $period)
     {
-        //
+        // $period = Period::find($period);
+        // dd($period);
+        $period->delete(); //delete form
+        return redirect()->route('periode.index')->with('success','Data Periode Berhasil Terhapus!'); //redirect ke halaman index periode
     }
 }

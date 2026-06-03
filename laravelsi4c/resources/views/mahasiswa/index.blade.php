@@ -3,7 +3,7 @@
 @section('title', 'Mahasiswa')
 
 @section('content') 
-<a href="{{route('mahasiswa.create')}}" class="btn btn-secondary mb-3">Tambah Mahasiswa</a>
+<a href="{{route('mahasiswa.create')}}" class="btn btn-dark mb-3">Tambah Mahasiswa</a>
 @session('success')
       <div class="alert alert-success">
         {{ $value }}
@@ -25,21 +25,24 @@
         <td>{{ $key + 1 }}</td>
         <td>{{ $mhs->npm }}</td>
         <td>{{ $mhs->nama }}</td>
-        <td>{{ $prodi->nama_prodi ??'-' }}</td>
+        <td>{{ $mhs->prodi->nama_prodi ??'-' }}</td>
         <td>
+            <div>
             @if ($mhs->foto)
                 <img src="{{ asset('storage/'. $mhs->foto)}}" alt="Foto" width="50">    
             @else
                 <span class="text-muted">Tidak Ada Foto</span>  
             @endif
         </td>
-        <td>
+        <td class="d-flex d-inline gap-2">
+        <a href="{{route('mahasiswa.edit', $mhs->id)}}" class="btn btn-primary btn-rounded mb-2">Edit</a>
             <form method="POST" action="{{ route('mahasiswa.destroy', $mhs->id)}}">
                 @csrf
-                <input name = "_method" type="hidden" value="DELETE">
+                <input type="hidden" name="_method" value="DELETE">
                 <button type="submit" class="btn btn-danger btn-rounded show_confirm" data-toggle="tooltip" 
-                title = 'Delete' data-nama = '{{ $mhs->nama_prodi}}'>Hapus</button>
+                title = 'Delete' data-nama = '{{ $mhs->nama}}'>Hapus</button>
             </form>
+            </div>
         </td>
     </tr>
     @endforeach

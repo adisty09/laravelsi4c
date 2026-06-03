@@ -17,7 +17,7 @@
     <tr>
         <td>{{ $key + 1 }}</td>
         <td>{{ $period->tahun_akademik }}</td>
-        <td>{{ $period->kode_smt }}</td>
+        <td>{{ $period->kode_smt == 1 ? 'Ganjil' : 'Genap' }}</td>
 
     </tr>
     @endforeach

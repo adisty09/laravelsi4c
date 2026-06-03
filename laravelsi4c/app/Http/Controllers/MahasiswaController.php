@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use App\Models\Prodi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MahasiswaController extends Controller
 {
@@ -63,7 +64,7 @@ class MahasiswaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Mahasiswa $mhs)
+    public function show(Mahasiswa $mahasiswa)
     {
         //
     }
@@ -71,25 +72,57 @@ class MahasiswaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Mahasiswa $mhs)
+    public function edit(Mahasiswa $mahasiswa)
     {
-        //
+        //ambilsemua data prodi untuk list dropdown di form edit
+        $prodi = Prodi::all();
+        //kirim data mahasiswa dan prodi ke halaman view 
+        return view('mahasiswa.edit', compact('mahasiswa', 'prodi'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Mahasiswa $mhs)
+    public function update(Request $request, Mahasiswa $mahasiswa)
     {
-        //
+        //dd($mahasiswa);
+        //validasi data
+        $input = $request->validate([
+            'nama' => 'required|unique:mahasiswas,nama,'
+            .$mahasiswa->id, //validasi nama harus unik sitabel mahasiswas kecuali
+            //data yang sedang diupdate
+            'npm' => 'required|unique:mahasiswas,npm,' . $mahasiswa->id,
+            'prodi_id' => 'required'
+        ]);
+        if ($request->hasFile('foto')) {
+            //hapus file foto lama jika ada
+            if ($mahasiswa->foto && file_exists(storage_path('app/public/' . $mahasiswa->foto))) {
+                unlink(storage_path('app/public/' . $mahasiswa->foto));
+            }
+            //upload file foto baru
+            $filename = $request->npm . '.' . $request->file('foto')->getClientOriginalExtension();
+            $path = $request->file('foto')->storeAs('mahasiswa', $filename, 'public');
+            $input['foto'] = $path;
+        }
+
+        //update data ke tabel mahasiswa
+        $mahasiswa ->update($input);
+        //redirect ke halaman index mahasiswa
+        return redirect()->route('mahasiswa.index')->with('success', 'Data Mahasiswa Berhasil Diupdate!');
+        //redirect ke halaman index mahasiswa dengan pesan success
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Mahasiswa $mhs)
+    public function destroy(Mahasiswa $mahasiswa)
     {
-        //
+        //hapus file foto berdasarkan path yang tersimpan di database
+        if ($mahasiswa->foto && file_exists(storage_path('app/public/' . $mahasiswa->foto))){
+            unlink(storage_path('app/public/' . $mahasiswa->foto));
+        }
+        $mahasiswa->delete();
+        return redirect()->route('mahasiswa.index')->with('success', 'Data Mahasiswa Berhasil Dihapus!');
     }
 }
 

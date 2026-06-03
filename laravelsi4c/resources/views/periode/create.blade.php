@@ -3,7 +3,7 @@
 @section('title', 'Tambah Periode')
 
 @section('content')
-    <a href="{{ route('periode.index') }}" class="btn btn-primary mb-3">Kembali</a>
+    <a href="{{ route('periode.index') }}" class="btn btn-secondary mb-3">Kembali</a>
     <form action="{{ route('periode.store') }}" method="post">
         @csrf
         <div class="m-3">
@@ -15,7 +15,7 @@
                 
             @enderror
 
-            <label for="kode_smt" class="form-label">Kode kode_smt</label>
+            <label for="kode_smt" class="form-label">Kode Semester</label>
             <select class="form-select" name="kode_smt" id="kode_smt" required>
                <option value="" disabled selected>Pilih Kode Semester</option>
                <option value="1" {{ old('kode_smt') == '1' ? 'selected' : ''}}>Ganjil</option>
@@ -26,7 +26,7 @@
                 
             @enderror
 
-            <button type="submit" class="btn btn-primary mt-3">Simpan</button>
+            <button type="submit" class="btn btn-secondary mt-3">Simpan</button>
         </div>
     </form>
    

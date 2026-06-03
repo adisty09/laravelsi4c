@@ -3,7 +3,7 @@
 @section('title', 'Fakultas')
 
 @section('content')
-<a href="{{route('fakultas.create')}}" class="btn btn-secondary mb-3">Tambah Fakultas</a>
+<a href="{{route('fakultas.create')}}" class="btn btn-dark mb-3">Tambah Fakultas</a>
   @session('success')
       <div class="alert alert-success">
         {{ $value }}
@@ -28,7 +28,7 @@
         <td>{{ $fakultas->Singkatan }}</td>
         <td>{{ $fakultas->Dekan }}</td>
         <td  class="d-flex d-inline gap-2">
-            <a href="{{route('fakultas.edit', $fakultas->id)}}" class="btn btn-warning btn-rounded mb-2">Edit</a>
+            <a href="{{route('fakultas.edit', $fakultas->id)}}" class="btn btn-primary btn-rounded mb-2">Edit</a>
             <form method="POST" action="{{ route('fakultas.destroy', $fakultas->id)}}">
                 @csrf
                 <input name = "_method" type="hidden" value="DELETE">
