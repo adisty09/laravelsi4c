@@ -14,10 +14,8 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        //ambil data mahasiswa beserta relasi prodi
         $mahasiswa = Mahasiswa::with('prodi')->get();
         return view('mahasiswa.index', compact('mahasiswa'));
-        
     }
 
     /**
@@ -25,7 +23,6 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        // ambil data prodi untuk list dropdown
         $prodi = Prodi::all();
         return view('mahasiswa.create', compact('prodi'));
     }
@@ -35,31 +32,33 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        // validasi input
         $request->validate([
-            'npm' =>'required|unique:mahasiswas,npm', //npm harus unik
-            'nama'=> 'required',
-            'prodi_id' =>'required',//prodi harus ada tabel prodis
-            'foto' => 'nullable|image|max:2048', // optional foto, max 2MB
+            'npm' => 'required|unique:mahasiswas,npm', 
+            'nama' => 'required',
+            'prodi_id' => 'required',
+            'foto' => 'nullable|image|max:2048', 
         ]);
 
         $data = $request->all();
 
-        // upload file foto jika ada
         if ($request->hasFile('foto')){
-            // rename file dengan npm untuk menghindari duplikasi nama
-            $filename = $request->input('npm') . '.' . $request->file('foto')->getClientOriginalExtension();
-            $path = $request->file('foto')->storeAs('mahasiswa', $filename, 'vercel_tmp');
-            $data['foto'] = $path;
+            $file = $request->file('foto');
+            $filename = $request->input('npm') . '.' . $file->getClientOriginalExtension();
+            
+            // Bypass menggunakan folder /tmp Vercel secara native
+            $targetDir = '/tmp/storage/app/public/mahasiswa';
+            if (!file_exists($targetDir)) {
+                mkdir($targetDir, 0755, true);
+            }
+            
+            move_uploaded_file($file->getRealPath(), $targetDir . '/' . $filename);
+            $data['foto'] = 'mahasiswa/' . $filename;
         } 
 
-        // simpan data mahasiswa
         Mahasiswa::create($data);
 
-        //redirect ke halaman index dengan pesan sukses
-        return redirect()->route('mahasiswa.index')->with('success', 'Data Mahasiswa Berhasi Disimpan!');
-        }
-    
+        return redirect()->route('mahasiswa.index')->with('success', 'Data Mahasiswa Berhasil Disimpan!');
+    }
 
     /**
      * Display the specified resource.
@@ -74,9 +73,7 @@ class MahasiswaController extends Controller
      */
     public function edit(Mahasiswa $mahasiswa)
     {
-        //ambilsemua data prodi untuk list dropdown di form edit
         $prodi = Prodi::all();
-        //kirim data mahasiswa dan prodi ke halaman view 
         return view('mahasiswa.edit', compact('mahasiswa', 'prodi'));
     }
 
@@ -85,31 +82,35 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, Mahasiswa $mahasiswa)
     {
-        //dd($mahasiswa);
-        //validasi data
         $input = $request->validate([
-            'nama' => 'required|unique:mahasiswas,nama,'
-            .$mahasiswa->id, //validasi nama harus unik sitabel mahasiswas kecuali
-            //data yang sedang diupdate
+            'nama' => 'required|unique:mahasiswas,nama,' . $mahasiswa->id, 
             'npm' => 'required|unique:mahasiswas,npm,' . $mahasiswa->id,
             'prodi_id' => 'required'
         ]);
+
         if ($request->hasFile('foto')) {
-            //hapus file foto lama jika ada
-            if ($mahasiswa->foto && file_exists(storage_path('app/public/' . $mahasiswa->foto))) {
-                unlink(storage_path('app/public/' . $mahasiswa->foto));
+            $file = $request->file('foto');
+            
+            // Hapus file foto lama di /tmp jika ada
+            $oldFile = '/tmp/storage/app/public/' . $mahasiswa->foto;
+            if ($mahasiswa->foto && file_exists($oldFile)) {
+                unlink($oldFile);
             }
-            //upload file foto baru
-            $filename = $request->npm . '.' . $request->file('foto')->getClientOriginalExtension();
-            $path = $request->file('foto')->storeAs('mahasiswa', $filename, 'public');
-            $input['foto'] = $path;
+
+            $filename = $request->npm . '.' . $file->getClientOriginalExtension();
+            
+            // Simpan file baru ke /tmp secara native
+            $targetDir = '/tmp/storage/app/public/mahasiswa';
+            if (!file_exists($targetDir)) {
+                mkdir($targetDir, 0755, true);
+            }
+            
+            move_uploaded_file($file->getRealPath(), $targetDir . '/' . $filename);
+            $input['foto'] = 'mahasiswa/' . $filename;
         }
 
-        //update data ke tabel mahasiswa
-        $mahasiswa ->update($input);
-        //redirect ke halaman index mahasiswa
+        $mahasiswa->update($input);
         return redirect()->route('mahasiswa.index')->with('success', 'Data Mahasiswa Berhasil Diupdate!');
-        //redirect ke halaman index mahasiswa dengan pesan success
     }
 
     /**
@@ -117,12 +118,12 @@ class MahasiswaController extends Controller
      */
     public function destroy(Mahasiswa $mahasiswa)
     {
-        //hapus file foto berdasarkan path yang tersimpan di database
-        if ($mahasiswa->foto && file_exists(storage_path('app/public/' . $mahasiswa->foto))){
-            unlink(storage_path('app/public/' . $mahasiswa->foto));
+        $oldFile = '/tmp/storage/app/public/' . $mahasiswa->foto;
+        if ($mahasiswa->foto && file_exists($oldFile)){
+            unlink($oldFile);
         }
+        
         $mahasiswa->delete();
         return redirect()->route('mahasiswa.index')->with('success', 'Data Mahasiswa Berhasil Dihapus!');
     }
 }
-
