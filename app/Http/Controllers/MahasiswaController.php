@@ -48,8 +48,8 @@ class MahasiswaController extends Controller
         // upload file foto jika ada
         if ($request->hasFile('foto')){
             // rename file dengan npm untuk menghindari duplikasi nama
-            $filename = $request->npm. '.'. $request->file('foto')->getClientOriginalExtension();
-            $path = $request->file('foto')->storeAs('mahasiswa', $filename, 'public');
+            $filename = $request->input('npm') . '.' . $request->file('foto')->getClientOriginalExtension();
+            $path = $request->file('foto')->storeAs('mahasiswa', $filename, 'vercel_tmp');
             $data['foto'] = $path;
         } 
 
